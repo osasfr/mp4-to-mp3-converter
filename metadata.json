@@ -1,6 +1,6 @@
 {
   "name": "MP4 to MP3 Converter",
-  "description": "A client-side web application that allows users to upload up to 10 GB MP4 videos and securely converts them to MP3 audio files in the browser.",
+  "description": "A client-side web application that allows users to upload up to 1 GB MP4 videos and securely converts them to MP3 audio files in the browser.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

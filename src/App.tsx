@@ -57,8 +57,8 @@ export default function App() {
     setIsDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const droppedFile = e.dataTransfer.files[0];
-      if (droppedFile.size > 10 * 1024 * 1024 * 1024) {
-        setError("File size exceeds the 10 GB limit.");
+      if (droppedFile.size > 1024 * 1024 * 1024) {
+        setError("File size exceeds the 1 GB limit.");
         return;
       }
       if (droppedFile.type.includes("video/mp4") || droppedFile.name.toLowerCase().endsWith(".mp4")) {
@@ -73,8 +73,8 @@ export default function App() {
   const handleFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0];
-      if (selectedFile.size > 10 * 1024 * 1024 * 1024) {
-        setError("File size exceeds the 10 GB limit.");
+      if (selectedFile.size > 1024 * 1024 * 1024) {
+        setError("File size exceeds the 1 GB limit.");
         return;
       }
       setFile(selectedFile);
@@ -188,7 +188,7 @@ export default function App() {
                 <Upload size={32} />
               </div>
               <p className="text-lg font-semibold text-slate-700 mb-1">Click or drag your MP4 here</p>
-              <p className="text-slate-500 text-sm mb-6">Supports files up to 10 GB. Processed locally.</p>
+              <p className="text-slate-500 text-sm mb-6">Supports files up to 1 GB. Processed locally.</p>
               <button className="bg-slate-900 text-white px-6 py-2.5 rounded-full font-medium hover:bg-slate-800 transition-colors">
                 Select File
               </button>
