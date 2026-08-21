@@ -1,0 +1,6 @@
+{
+  "name": "MP4 to M4A Extractor",
+  "description": "A web application that allows users to upload MP4 videos and instantly extracts the original audio into an M4A file without re-encoding.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
