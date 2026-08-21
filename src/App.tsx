@@ -145,9 +145,9 @@ export default function App() {
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white text-center">
           <div className="flex justify-center mb-6">
             <img 
-              src="/favicon.svg" 
+              src="/logo.svg" 
               alt="App Logo" 
-              className="w-20 h-20 shadow-lg rounded-2xl bg-white p-1"
+              className="w-24 h-24 shadow-lg rounded-2xl bg-white p-2"
             />
           </div>
           <h1 className="text-3xl font-bold mb-2 tracking-tight">MP4 to MP3 Converter</h1>

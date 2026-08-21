@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <linearGradient id="mp4Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#7e22ce" />
+    </linearGradient>
+    <linearGradient id="mp3Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+  </defs>
+
+  <!-- Thick U-shaped arrow -->
+  <path d="M 384 192 C 384 100, 128 100, 128 192 L 128 320 C 128 412, 320 412, 320 412 L 320 320" stroke="url(#arrowGrad)" stroke-width="64" stroke-linecap="round" fill="none" />
+  
+  <!-- Arrow Head -->
+  <path d="M 280 476 L 400 412 L 280 348 Z" fill="#0284c7" />
+
+  <!-- Purple MP4 File Icon -->
+  <rect x="100" y="160" width="130" height="150" rx="20" fill="url(#mp4Grad)" />
+  <path d="M145 195 L 185 220 L 145 245 Z" fill="white" />
+  <text x="165" y="290" font-family="Arial, sans-serif" font-size="36" font-weight="900" fill="white" text-anchor="middle">MP4</text>
+
+  <!-- Blue MP3 File Icon -->
+  <rect x="250" y="130" width="130" height="150" rx="20" fill="url(#mp3Grad)" stroke="white" stroke-width="16" />
+  
+  <!-- Music Note inside MP3 -->
+  <path d="M305 190 L 325 185 L 325 210 C 320 210, 310 215, 310 220 C 310 225, 320 230, 325 230 C 330 230, 335 225, 335 220 L 335 160 L 295 170 L 295 210 C 290 210, 280 215, 280 220 C 280 225, 290 230, 295 230 C 300 230, 305 225, 305 220 L 305 190 Z" fill="white" />
+  <circle cx="292" cy="222" r="10" fill="white" />
+  <circle cx="322" cy="216" r="10" fill="white" />
+  
+  <text x="315" y="260" font-family="Arial, sans-serif" font-size="36" font-weight="900" fill="white" text-anchor="middle">MP3</text>
+
+  <!-- Bottom sound waves -->
+  <rect x="200" y="450" width="8" height="20" rx="4" fill="#0284c7" />
+  <rect x="215" y="440" width="8" height="40" rx="4" fill="#0284c7" />
+  <rect x="230" y="455" width="8" height="15" rx="4" fill="#0284c7" />
+
+</svg>
