@@ -57,8 +57,8 @@ export default function App() {
     setIsDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const droppedFile = e.dataTransfer.files[0];
-      if (droppedFile.size > 100 * 1024 * 1024) {
-        setError("File size exceeds the 100 MB limit.");
+      if (droppedFile.size > 10 * 1024 * 1024 * 1024) {
+        setError("File size exceeds the 10 GB limit.");
         return;
       }
       if (droppedFile.type.includes("video/mp4") || droppedFile.name.toLowerCase().endsWith(".mp4")) {
@@ -73,8 +73,8 @@ export default function App() {
   const handleFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0];
-      if (selectedFile.size > 100 * 1024 * 1024) {
-        setError("File size exceeds the 100 MB limit.");
+      if (selectedFile.size > 10 * 1024 * 1024 * 1024) {
+        setError("File size exceeds the 10 GB limit.");
         return;
       }
       setFile(selectedFile);
@@ -104,24 +104,24 @@ export default function App() {
       // Write file to in-memory file system
       await ffmpeg.writeFile('input.mp4', await fetchFile(file));
       
-      // Run extraction (no re-encoding, just copy the audio track)
-      await ffmpeg.exec(['-i', 'input.mp4', '-vn', '-acodec', 'copy', 'output.m4a']);
+      // Run conversion to MP3
+      await ffmpeg.exec(['-i', 'input.mp4', '-vn', '-c:a', 'libmp3lame', '-b:a', '192k', 'output.mp3']);
       
       // Read output
-      const data = await ffmpeg.readFile('output.m4a');
+      const data = await ffmpeg.readFile('output.mp3');
       
       // Create blob URL for download
-      const blob = new Blob([(data as Uint8Array).buffer], { type: 'audio/mp4' });
+      const blob = new Blob([(data as Uint8Array).buffer], { type: 'audio/mpeg' });
       const url = URL.createObjectURL(blob);
       setDownloadUrl(url);
       
       const originalName = file.name;
       const baseName = originalName.substring(0, originalName.lastIndexOf('.')) || originalName;
-      setDownloadName(`${baseName}.m4a`);
+      setDownloadName(`${baseName}.mp3`);
       setPhase("complete");
     } catch (err: any) {
       console.error(err);
-      setError("Extraction failed. The file might not be a valid MP4 or your browser lacks sufficient memory.");
+      setError("Conversion failed. The file might not be a valid MP4 or your browser lacks sufficient memory.");
     } finally {
       setIsConverting(false);
     }
@@ -150,8 +150,8 @@ export default function App() {
               <FileAudio size={28} className="text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold mb-2 tracking-tight">MP4 to M4A Extractor</h1>
-          <p className="text-blue-100 font-medium">Extract original audio from your videos instantly without re-encoding.</p>
+          <h1 className="text-3xl font-bold mb-2 tracking-tight">MP4 to MP3 Converter</h1>
+          <p className="text-blue-100 font-medium">Convert your videos to MP3 audio directly in your browser.</p>
         </div>
 
         {/* Main Content */}
@@ -188,7 +188,7 @@ export default function App() {
                 <Upload size={32} />
               </div>
               <p className="text-lg font-semibold text-slate-700 mb-1">Click or drag your MP4 here</p>
-              <p className="text-slate-500 text-sm mb-6">Supports files up to 100 MB. Processed instantly.</p>
+              <p className="text-slate-500 text-sm mb-6">Supports files up to 10 GB. Processed locally.</p>
               <button className="bg-slate-900 text-white px-6 py-2.5 rounded-full font-medium hover:bg-slate-800 transition-colors">
                 Select File
               </button>
@@ -218,7 +218,7 @@ export default function App() {
                 <div className="w-full bg-slate-100 rounded-xl p-4 flex flex-col gap-3">
                   <div className="flex justify-between items-center mb-1">
                     <span className="text-sm font-semibold text-blue-700 uppercase tracking-wider">
-                      Extracting Audio...
+                      Converting to MP3...
                     </span>
                     <span className="text-sm font-bold text-slate-700">
                       {progress > 0 ? `${progress}%` : "Please wait"}
@@ -244,7 +244,7 @@ export default function App() {
                   onClick={handleConvert}
                   className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors flex justify-center items-center gap-2"
                 >
-                  Extract Audio
+                  Convert to MP3
                 </button>
               )}
               
@@ -278,7 +278,7 @@ export default function App() {
               <div className="bg-green-100 text-green-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <FileAudio size={40} />
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-2">Extraction Complete!</h3>
+              <h3 className="text-xl font-bold text-slate-800 mb-2">Conversion Complete!</h3>
               <p className="text-slate-600 mb-6 truncate px-4 text-sm">{downloadName}</p>
               
               <div className="flex flex-col gap-3">
@@ -288,14 +288,14 @@ export default function App() {
                   className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors flex justify-center items-center gap-2 shadow-sm"
                 >
                   <Download size={20} />
-                  Download Audio (M4A)
+                  Download MP3
                 </a>
                 <button
                   onClick={handleReset}
                   className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold py-3.5 px-6 rounded-xl transition-colors flex justify-center items-center gap-2"
                 >
                   <RefreshCw size={20} />
-                  Extract Another
+                  Convert Another
                 </button>
               </div>
             </motion.div>
